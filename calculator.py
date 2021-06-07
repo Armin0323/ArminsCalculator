@@ -40,6 +40,42 @@ def divider(currentValue):         #Declares a function divider which divides tw
     quotient = currentValue/divide
     return quotient
 
+def exponent(currentValue):          #declares an exponent function that takes in the current value stored in the calculator as an argument
+
+    #Print statement to prompt the user for an input, and takes in user input into variable power and casts it as an int
+    print("Please enter an integer of what power you would like to raise ", currentValue, " to")
+    power = int(input())
+
+    #establishes a counter valuable for the for loop
+    counter = 1
+
+    #establishes a temporary value to store the calculations in
+    tempValue = currentValue
+
+    #condition that checks if power is 0 in order to return 1 no matter what
+    if power == 0:
+        return 1
+
+    #condition to check if power is 1, it will return the same value
+    elif power == 1:
+        return currentValue
+
+    #condition to check if power is less than 0, then it loops and divides the value
+    elif power < 0:
+        power = abs(power)
+        for x in range(counter,power):
+            tempValue = tempValue/currentValue
+        currentValue = tempValue
+        return currentValue
+
+    #condition to check if power is greater than one, if so it multiplies current value in the forloop.
+    elif power > 0:
+        for x in range(counter, power):
+            tempValue = tempValue * currentValue
+        currentValue = tempValue
+        return currentValue
+    else:
+        return currentValue
 
 def main():            #Declares the main function
 
@@ -50,13 +86,14 @@ def main():            #Declares the main function
     while(1):            #While loop to keep the calculator running
 
         #Print Statements describing to the user what the options are
-        print("The following options are available")
+        print("The following options are available:")
         print("Option 1: ADD")
         print("Option 2: SUBTRACT")
         print("Option 3: MULTIPLY")
         print("Option 4: DIVIDE")
         print("Option 5: CLEAR")
-        print("Option 6: QUIT")
+        print("Option 6: EXPONENT")
+        print("Option 7: QUIT")
 
         #Print statement prompting the user to input a number to select an option. Typecasts it to a float
         print("Please enter the number of the option you would like to do")
@@ -106,9 +143,16 @@ def main():            #Declares the main function
             #sets the value stored in the calculator to 0 and confirms it to the user
             currentValue = 0
             print("The calculator has been cleared to 0")
-
-        #catches Option 6, quitting, and breaks from the while loop
+        
+        #catches option 6, performing the exponent function
         elif userOpt == '6':
+
+            #takes the value stored in the calculator and passes it to exponent function
+            currentValue = exponent(currentValue)
+            print("The answer is: ", currentValue)
+
+        #catches Option 7, quitting, and breaks from the while loop
+        elif userOpt == '7':
             break
         
         #catches all other options which are not valid and prints an error message
