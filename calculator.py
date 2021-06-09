@@ -1,4 +1,5 @@
-#This file will include simple calculator functions such as add, subtract, multiply, and divide
+#This file will include simple calculator functions such as add, subtract, multiply, divide, and some exponents
+#All of the strings are formatted {:.4f} when printed to the screen to increase accuracy due to python's emphasis on precision
 
 def adder(currentValue):         #Declares a function which will be used to add numbers together and takes in an argument
 
@@ -11,54 +12,54 @@ def adder(currentValue):         #Declares a function which will be used to add 
         sum = currentValue + add
         return sum
     except:                          #catches if the user fails to input a number
-        print("You did not enter a number")        #informs the user they didn't enter a number
+        print("ERROR: You did not enter a number")        #informs the user they didn't enter a number
         sum = adder(currentValue)     #recursively calls the function to prompt the user again
         return sum                    #returns the correct value as the sum
 
-def subtractor(currentValue):
+def subtractor(currentValue):           #delcares subtractor function that takes in the current value stored in the calculator, a user inputted value, and takes the difference
    
     #prompts the user to enter a number and accepts input from the user, typecasts it to a float
     print("What number would you like to subtract from {:.4f}?".format(currentValue))
-    try:
+    try:                                   #this is to try the statement to catch any errors
         subtract = float(input())
 
         #Takes the difference between the value stored in the calculator and subtract and returns the difference
         difference = currentValue - subtract
         return difference
-    except:
-        print("You did not enter a number.")
-        difference = subtractor(currentValue)
-        return difference
+    except:                                             #catches errors
+        print("ERROR You did not enter a number.")      #informs the user of an error
+        difference = subtractor(currentValue)           #calls the function recursively and stores the difference
+        return difference                               #returns the difference
 
 def multiplier(currentValue):      #Declares the multiplier function which multiplies two numbers together, takes current value in calculator as an argument
 
     #prompts the user to enter a number and accepts input from the user, typecasts it to a float
     print("What number would you like to multiply to {:.4f}?".format(currentValue))
-    try:
-        multiple = float(input())
+    try:                                #tries the block of code for errors
+        multiple = float(input())       
 
         #Takes the product of the stored value in the calculator and the user inputted number and returns the product
         product = currentValue * multiple
         return product
-    except:
-        print("You did not enter a number.")
-        product = multiplier(currentValue)
-        return product
+    except:                                            #catches errors
+        print("ERROR: You did not enter a number.")    #informs the user there was an error
+        product = multiplier(currentValue)             #calls the function recursively and stores the product
+        return product                                 #returns the product
 
 def divider(currentValue):         #Declares a function divider which divides two numbers and returns the quotient
 
     #prompts the user to input another number and accepts it, typecasts it to a float
     print("What number would you like to divide {:.4f} by?".format(currentValue))
-    try:
+    try:                                   #tries the block of code for any errors
         divide = float(input())
 
         #Takes the quotient of the stored value in the calculator and the user inputted number and returns the quotient
         quotient = currentValue/divide
         return quotient
-    except:
-        print("You did not enter a number or you tried to divide by zero.")
-        quotient = divider(currentValue)
-        return quotient
+    except:                                                                     #catches any errors
+        print("You did not enter a number or you tried to divide by zero.")     #informs the user of errors
+        quotient = divider(currentValue)                                        #calls the function recursively and stores the quotient
+        return quotient                                                         #returns the quotient
 
 def exponent(currentValue):          #declares an exponent function that takes in the current value stored in the calculator as an argument
 
@@ -83,34 +84,34 @@ def exponent(currentValue):          #declares an exponent function that takes i
 
         #condition to check if power is less than 0, then it loops and divides the value
         elif power < 0:
-            power = abs(power)
-            for x in range(counter - 2,power):
-                tempValue = tempValue/currentValue
-            currentValue = tempValue
-            return currentValue
+            power = abs(power)                   #takes the absolute value of power to find out the range of the for loop
+            for x in range(counter - 2,power):       #for loop to iterate through. counter is counter - 2 because there is one extra division to be made and the for loop stops at one minus the magnitude needed
+                tempValue = tempValue/currentValue   #stores the iterations in tempValue
+            raisedValue = tempValue                 #stores the final value after the for loop iterations in a variable called raisedValue
+            return raisedValue           #returns the answer
 
         #condition to check if power is greater than one, if so it multiplies current value in the forloop.
         elif power > 0:
-            for x in range(counter, power):
-                tempValue = tempValue * currentValue
-            currentValue = tempValue
-            return currentValue
+            for x in range(counter, power):             #for loop for iterations
+                tempValue = tempValue * currentValue    #stores every iteration value into tempValue
+            raisedValue = tempValue                     #stores the final value after the for loop in a variable called raisedValue
+            return raisedValue                          #returns the answer
         else:
-            return currentValue
-    except:
+            return currentValue                         #returns the value if none of the above are satisfied
+    except:                                             #catches an error if the user didn't put in a number
         print("You did not enter an integer.")
-        raisedValue = exponent(currentValue)
-        return raisedValue
+        raisedValue = exponent(currentValue)            #calls the function recursively and stores the value in raisedValue
+        return raisedValue                              #returns the answer
 
 def initialize():        #The initializer function 
-    print("Please enter a number for the calculator: ")
-    try:
-        initValue = float(input())
-        return initValue
-    except:
-        print("Error, did not enter a number.")
-        initValue = initialize()
-        return initValue
+    print("Please enter a number for the calculator: ")     #prompts the user to input a number
+    try:                                                    #tries the block of code for any errors
+        initValue = float(input())                          #stores the value inputted and typecasts it to a float
+        return initValue                                    #returns the value obtained
+    except:                                                 #catches any errors
+        print("Error, did not enter a number.")             #informs the user of an error
+        initValue = initialize()                            #calls the function recursively
+        return initValue                                    #returns the value
 
 def main():            #Declares the main function
 
